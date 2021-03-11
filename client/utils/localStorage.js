@@ -1,9 +1,9 @@
 const ls = (localStorage) => {
-  let storage = { ...localStorage };
+  let storage = localStorage;
   let isAvailable = false;
   let storageChecked = false;
 
-  (() => {
+  const checkForLS = () => {
     if (!storageChecked) {
       if (!storage) {
         isAvailable = false;
@@ -16,31 +16,40 @@ const ls = (localStorage) => {
         isAvailable = false;
       }
       storageChecked = true;
+      return isAvailable;
     }
-  })();
+    return isAvailable;
+  };
 
   const set = (key, value) => {
-    if (isAvailable) {
+    if (checkForLS) {
       storage.setItem(key, JSON.stringify(value));
     }
   };
 
   const get = (key) => {
-    if (isAvailable) {
+    if (checkForLS) {
       return JSON.parse(storage.getItem(key));
     }
   };
 
   const remove = (key) => {
-    if (isAvailable) {
+    if (checkForLS) {
       storage.removeItem(key);
     }
   };
+
+  const showAllKeys = () => ({
+    storage,
+    isAvailable,
+    storageChecked,
+  });
 
   return {
     set,
     get,
     remove,
+    showAllKeys,
   };
 };
 
