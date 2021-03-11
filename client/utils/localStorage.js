@@ -1,44 +1,47 @@
-class LocalStorage {
-  constructor(storage) {
-    this.storage = storage;
-    this.isAvailable = false;
-    this.storageChecked = false;
-    this.checkForLocalStorage();
-  }
+const ls = (localStorage) => {
+  let storage = { ...localStorage };
+  let isAvailable = false;
+  let storageChecked = false;
 
-  set(key, value) {
-    if (this.isAvailable) {
-      this.storage.setItem(key, JSON.stringify(value));
-    }
-  }
-
-  get(key) {
-    if (this.isAvailable) {
-      return JSON.parse(this.storage.getItem(key));
-    }
-  }
-
-  remove(key) {
-    if (this.isAvailable) {
-      this.storage.removeItem(key);
-    }
-  }
-
-  checkForLocalStorage() {
-    if (!this.storageChecked) {
-      if (!this.storage) {
-        this.isAvailable = false;
+  (() => {
+    if (!storageChecked) {
+      if (!storage) {
+        isAvailable = false;
       }
       try {
-        this.set('test', 'test');
-        this.remove('test');
-        this.isAvailable = true;
+        set('test', 'test');
+        remove('test');
+        isAvailable = true;
       } catch (e) {
-        this.isAvailable = false;
+        isAvailable = false;
       }
-      this.storageChecked = true;
+      storageChecked = true;
     }
-  }
-}
+  })();
 
-module.exports = LocalStorage;
+  const set = (key, value) => {
+    if (isAvailable) {
+      storage.setItem(key, JSON.stringify(value));
+    }
+  };
+
+  const get = (key) => {
+    if (isAvailable) {
+      return JSON.parse(storage.getItem(key));
+    }
+  };
+
+  const remove = (key) => {
+    if (isAvailable) {
+      storage.removeItem(key);
+    }
+  };
+
+  return {
+    set,
+    get,
+    remove,
+  };
+};
+
+export default ls;
