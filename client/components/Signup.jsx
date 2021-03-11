@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ls from '../utils/localStorage';
 import Navbar from './Navbar.jsx';
+
+const storage = ls(window.localStorage);
 
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
@@ -20,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'AUTHENTICATE', payload: user });
     },
     assignAlias: (alias) => {
-      dispatch({ type: 'ASSIGN_ALIAS', payload: alias})
-    }
+      dispatch({ type: 'ASSIGN_ALIAS', payload: alias });
+    },
   };
 };
 
@@ -60,7 +63,8 @@ const Signup = (props) => {
         .then((data) => {
           props.authenticate(data);
           props.history.push('/');
-          props.assignAlias(data.alias)
+          props.assignAlias(data.alias);
+          storage.set('alias', data.alias);
         })
         .catch((err) => console.log('Sign up fetch /auth/login: ERROR: ', err));
     }
