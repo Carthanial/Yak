@@ -8,9 +8,6 @@ const timestamp = (psqlDate) => {
   
     // 300 minutes is added to reconcile the 5 hour timezone difference resulting from PSQL's timestamp without timezone format 
     let differenceInMin = (currentTime-postTime)/1000/60+300
-    // console.log('postTime:', postTime)
-    // console.log('currentTime:', currentTime)
-    // console.log('differenceInMin:', differenceInMin)  
     if (differenceInMin < 1) {
       return "1m"
     } else if (differenceInMin < 60) {

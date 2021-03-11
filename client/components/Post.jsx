@@ -6,9 +6,6 @@ const timestamp = (psqlDate) => {
 
   // 300 minutes is added to reconcile the 5 hour timezone difference resulting from PSQL's timestamp without timezone format 
   let differenceInMin = (currentTime-postTime)/1000/60+300
-  // console.log('postTime:', postTime)
-  // console.log('currentTime:', currentTime)
-  // console.log('differenceInMin:', differenceInMin)  
   if (differenceInMin < 1) {
     return "1m"
   } else if (differenceInMin < 60) {
@@ -34,9 +31,8 @@ const timestamp = (psqlDate) => {
 
 
 export default function Post({ alias, body, dateTime, feedPostID, styling, karma, updateActiveThreadID, updatePostKarma }) {
-  // console.log(styling);
-  // to update to display how old (in minutes if less than a day) the posts are
   let time = timestamp(dateTime);
+
   return (
     <div className={`Post ${styling}`}>
       <h4>{alias}</h4>

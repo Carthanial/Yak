@@ -17,7 +17,7 @@ const postsReducer = (state = initialState, action) => {
     }
     case types.SAVE_POST: {
       const newPostList = [action.payload, ...state.posts];
-      return { ...state, posts: newPostList };
+      return { ...state, posts: newPostList, newPostBody: '' };
     }
     case types.UPDATE_ACTIVE_THREAD_ID: {
       return { ...state, activeThreadID: action.payload };

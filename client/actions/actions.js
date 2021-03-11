@@ -49,10 +49,8 @@ export const updateActiveThreadID = (newID) => ({
   payload: newID,
 });
 
-
-
 export const getThreads = (id) => (dispatch) => {
-  console.log('Inside getThreads in actions.js')
+  console.log('Inside getThreads in actions.js');
   console.log('Fetch id is ', id);
   // const reqBody = {
   //   postId: id
@@ -68,15 +66,14 @@ export const getThreads = (id) => (dispatch) => {
     });
 };
 
-
 export const saveThread = (alias, body, id, postId) => (dispatch) => {
   const reqBody = {
     alias,
     body,
     user_id: id,
-    parent_id: postId
+    parent_id: postId,
   };
-  console.log('Inside the saveThread actions.js file')
+  console.log('Inside the saveThread actions.js file');
   fetch('/threads', {
     method: 'POST',
     headers: { 'Content-Type': 'Application/JSON' },
@@ -100,11 +97,7 @@ export const updatePostKarma = (postID, karma) => (dispatch) => {
     post_id: postID,
     karma: karma,
   };
-  // dummy dispatch to test, works
-  // dispatch({
-  //   type: types.UPDATE_POST_KARMA,
-  //   payload: { _id: postID, karma: karma },
-  // });
+
   fetch('/posts/karma', {
     method: 'PATCH',
     headers: { 'Content-Type': 'Application/JSON' },

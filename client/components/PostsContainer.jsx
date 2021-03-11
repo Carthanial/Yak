@@ -28,10 +28,6 @@ class PostsContainer extends Component {
   renderThread(feedPostID, alias) {
     if (this.props.posts.activeThreadID === feedPostID) {
     return (
-      // dummy ThreadContainer, to be replaced
-      // <div>ThreadContainer</div>
-      //<ThreadsContainer/>
-      // uncomment below when ThreadContainer is merged, alias feature not implemented yet
       <ThreadsContainer alias={alias} feedPostID={feedPostID}/>
     )}
   }
