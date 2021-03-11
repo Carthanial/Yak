@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPosts, updateActiveThreadID, updatePostKarma } from '../actions/actions';
-import Post from './Post.jsx';
-import PostForm from './PostForm.jsx';
-import Navbar from './Navbar.jsx';
-import ThreadsContainer from './ThreadsContainer.jsx';
+import { getPosts, updateActiveThreadID } from '../actions/actions';
+import Post from '../components/Post.jsx';
+import PostForm from '../components/PostForm.jsx';
+import Navbar from '../components/Navbar.jsx';
+import ThreadsContainer from '../containers/ThreadsContainer.jsx';
 
 const mapStateToProps = (state) => {
   //
