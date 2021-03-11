@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ls from '../utils/localStorage';
 import Navbar from './Navbar.jsx';
+
+const storage = ls(window.localStorage);
 
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
