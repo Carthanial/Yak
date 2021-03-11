@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Wrapper from './containers/MainContainer.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
-import PostsContainer from './components/PostsContainer.jsx';
+import PostsContainer from './containers/PostsContainer.jsx';
 import FeedLink from './components/FeedLink.jsx';
 
 const mapStateToProps = (state) => ({
@@ -60,6 +60,7 @@ class App extends Component {
       <div className="router">
         <BrowserRouter>
           <Switch>
+            {/* <Route path="/main" exact component={Home} /> */}
             <Route path="/feed" exact component={PostsContainer} />
             <Route path="/" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
