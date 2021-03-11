@@ -54,6 +54,11 @@ export const updatePostKarma = (postID, karma) => (dispatch) => {
     post_id: postID,
     karma: karma,
   };
+  // dummy dispatch to test, works
+  // dispatch({
+  //   type: types.UPDATE_POST_KARMA,
+  //   payload: { _id: postID, karma: karma },
+  // });
   fetch('/posts/karma', {
     method: 'PATCH',
     headers: { 'Content-Type': 'Application/JSON' },

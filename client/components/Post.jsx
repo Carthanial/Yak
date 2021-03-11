@@ -44,9 +44,9 @@ export default function Post({ alias, body, dateTime, feedPostID, styling, karma
       <span>{time}</span>
       <br></br>
       <p></p>
-      <button>Upvote</button>
+      <button onClick={()=> updatePostKarma(feedPostID, karma+1)}>Upvote</button>
       <span>{karma} votes</span>
-      <button>Downvote</button>
+      <button onClick={()=> updatePostKarma(feedPostID, karma-1)}>Downvote</button>
       <br></br>
       <button onClick={()=> updateActiveThreadID(feedPostID)}>Comment</button>
     </div>
