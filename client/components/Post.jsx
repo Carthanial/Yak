@@ -35,7 +35,7 @@ export default function Post({ alias, body, dateTime, feedPostID, styling, karma
 
   return (
     <div className={`Post ${styling}`}>
-      <h4>{alias}</h4>
+      <h4>{alias}</h4><br></br>
       <p>{body}</p>
       <br></br>
       <span className="time">{time}</span>
