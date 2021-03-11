@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ls from '../utils/localStorage';
 import Navbar from './Navbar.jsx';
 
+console.log('local storage', localStorage);
+const storage = ls(window.localStorage);
 
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
@@ -21,8 +24,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'AUTHENTICATE', payload: user });
     },
     assignAlias: (alias) => {
-      dispatch({ type: 'ASSIGN_ALIAS', payload: alias})
-    }
+      dispatch({ type: 'ASSIGN_ALIAS', payload: alias });
+    },
   };
 };
 
@@ -57,8 +60,8 @@ const Login = (props) => {
         .then((data) => {
           console.log('data from login is: ', data);
           props.authenticate(data.user);
-          props.assignAlias(data.alias)
-
+          props.assignAlias(data.alias);
+          storage.set('alias', data.alias);
           // props.history.push('/feed');
           // history.push('/hello');
         })
@@ -82,7 +85,10 @@ const Login = (props) => {
         <article className="card createChar">
           <center>
             <h2 className="SignUpHeader">Yikkity Yak</h2>
-            <img id = "yak" src = "https://mondrian.mashable.com/2016%252F03%252F08%252F89%252Fyikyak.b38d3.jpg%252F950x534.jpg?signature=MOBHM6hQ8ivj8UQPUVcaK4G_HYc="/>
+            <img
+              id="yak"
+              src="https://mondrian.mashable.com/2016%252F03%252F08%252F89%252Fyikyak.b38d3.jpg%252F950x534.jpg?signature=MOBHM6hQ8ivj8UQPUVcaK4G_HYc="
+            />
           </center>
           <div className="createCharFields">
             <label htmlFor="username">Username: </label>
@@ -109,9 +115,9 @@ const Login = (props) => {
           </div>
           <div className="signup">
             <Link to="/signup" className="link">
-            <button type="button" className="btnMain" >
-              Sign Up
-            </button>
+              <button type="button" className="btnMain">
+                Sign Up
+              </button>
             </Link>
             <button type="button" className="btnMain" onClick={loginUser}>
               Login

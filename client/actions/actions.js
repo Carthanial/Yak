@@ -30,6 +30,7 @@ export const savePost = (alias, body, id) => (dispatch) => {
     .then((data) => {
       console.log(data);
       dispatch({ type: types.SAVE_POST, payload: data });
+      dispatch({ type: types.ASSIGN_ALIAS, payload: alias });
     })
     .catch((e) => console.log(e));
 };
