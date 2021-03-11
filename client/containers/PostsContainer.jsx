@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPosts, updateActiveThreadID } from '../actions/actions';
+import { getPosts, updateActiveThreadID, updatePostKarma } from '../actions/actions';
 import Post from '../components/Post.jsx';
 import PostForm from '../components/PostForm.jsx';
 import Navbar from '../components/Navbar.jsx';
@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getPosts,
-  updateActiveThreadID
+  updateActiveThreadID,
+  updatePostKarma
 };
 
 class PostsContainer extends Component {
@@ -27,10 +28,6 @@ class PostsContainer extends Component {
   renderThread(feedPostID, alias) {
     if (this.props.posts.activeThreadID === feedPostID) {
     return (
-      // dummy ThreadContainer, to be replaced
-      // <div>ThreadContainer</div>
-      //<ThreadsContainer/>
-      // uncomment below when ThreadContainer is merged, alias feature not implemented yet
       <ThreadsContainer alias={alias} feedPostID={feedPostID}/>
     )}
   }
@@ -42,10 +39,12 @@ class PostsContainer extends Component {
         <div>
           <Post
           updateActiveThreadID={this.props.updateActiveThreadID}
+          updatePostKarma={this.props.updatePostKarma}
           key={`Post ${i}`}
           alias={post.alias}
           body={post.body}
           feedPostID={post._id}
+          karma={post.karma}
           dateTime={post.createdat}
           userId={post.user_id}
           styling={post.user_id === this.props.userId ? 'MyPost' : null}

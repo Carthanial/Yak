@@ -46,6 +46,7 @@ class ThreadForm extends Component {
           }
         >
           <textarea
+            value= {this.props.newThreadBody}
             placeholder="Add a reply"
             onChange={(e) => this.props.updateThread(e.target.value)}
           />

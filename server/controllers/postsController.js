@@ -11,10 +11,9 @@ postsController.getFeedPosts = async (req, res, next) => {
     SELECT * FROM posts p
     WHERE p.parent_id = 0
     ORDER BY p.createdat DESC`;
-    const { rows } = await db.query(query)
-      res.locals.feedPosts = rows;
-      return next();
-      
+    const { rows } = await db.query(query);
+    res.locals.feedPosts = rows;
+    return next();
   } catch (err) {
     return next({
       log: 'error at postController.getFeedPosts',
@@ -33,11 +32,10 @@ postsController.getThreadPosts = async (req, res, next) => {
   SELECT * FROM posts p
   WHERE p.parent_id = $1
   ORDER BY p.createdat asc`;
-  
-    const { rows } = await db.query(query, [number]) 
-      res.locals.threadPosts = rows;
-      return next();
-    
+
+    const { rows } = await db.query(query, [number]);
+    res.locals.threadPosts = rows;
+    return next();
   } catch (err) {
     return next({
       log: 'error at postController.getThreadPosts',
@@ -59,9 +57,9 @@ postsController.createPost = async (req, res, next) => {
         VALUES($1, $2, NOW(), $3, $4)
         RETURNING *`;
 
-      const { rows } = await db.query(query, [user_id, alias, body, parent_id])
-        res.locals.newPost = rows[0];
-        return next();
+      const { rows } = await db.query(query, [user_id, alias, body, parent_id]);
+      res.locals.newPost = rows[0];
+      return next();
 
       /* Error handler for creating a comment ie thread post */
     } catch (err) {
@@ -81,10 +79,10 @@ postsController.createPost = async (req, res, next) => {
           VALUES($1, $2, NOW(), $3)
           RETURNING *`;
 
-      const { rows } = await db.query(query, [user_id, alias, body]) 
-        res.locals.newPost = rows[0];
-        return next();
-      
+      const { rows } = await db.query(query, [user_id, alias, body]);
+      res.locals.newPost = rows[0];
+      return next();
+
       /* Error handling for creating a feed post */
     } catch (err) {
       return next({
@@ -98,28 +96,26 @@ postsController.createPost = async (req, res, next) => {
 /* **************************** */
 /*  Controllers for karma logic */
 
- postsController.updatePostKarma = async (req, res, next) => {
-   try{
+postsController.updatePostKarma = async (req, res, next) => {
+  try {
     const { post_id, karma } = req.body;
-    
+
     const query = `
     UPDATE posts
     SET karma = $2
     WHERE posts._id = $1
     RETURNING *`;
 
-    const { rows } = await db.query(query, [post_id, karma])
-         res.locals.newKarma = rows[0];
-         return next();
-
-   }catch(err) {
+    const { rows } = await db.query(query, [post_id, karma]);
+    res.locals.newKarma = rows[0];
+    return next();
+  } catch (err) {
     return next({
       log: 'error at postsController.updatePostKarma when voting on a post',
       status: 401,
       message: `failed to vote on post, error: ${err.message}`,
     });
-   }
- }
-
+  }
+};
 
 module.exports = postsController;
