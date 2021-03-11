@@ -106,8 +106,8 @@ body {
     border: none;
     padding: 8px 20px;
     border-radius: 8px;
-    font-size: 1.5rem;
-    margin-left: 35px;
+    font-size: small;
+    margin-left: 25px;
     margin-right: 25px;
     margin: 10px;
   }
@@ -203,5 +203,6 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 53px;
+  font-size: medium;
+
 }

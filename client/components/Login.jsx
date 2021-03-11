@@ -109,8 +109,9 @@ const Login = (props) => {
           </div>
           <div className="signup">
             <Link to="/signup" className="link">
-              
+            <button type="button" className="btnMain" >
               Sign Up
+            </button>
             </Link>
             <button type="button" className="btnMain" onClick={loginUser}>
               Login
