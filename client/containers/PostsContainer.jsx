@@ -62,7 +62,8 @@ class PostsContainer extends Component {
         <Navbar />
         <center className="PostsContainer">
           {this.renderPosts()}
-          <PostForm />
+        <PostForm />
+          
         </center>
       </center>
     );
