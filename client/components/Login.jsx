@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from './Navbar.jsx';
 
+
 // Custom hook for handling input boxes
 // saves us from creating onChange handlers for them individually
 const useInput = (init) => {
@@ -81,7 +82,7 @@ const Login = (props) => {
         <article className="card createChar">
           <center>
             <h2 className="SignUpHeader">Yikkity Yak</h2>
-            <img src = "YikYak.jpg" style = {{ height:300, width:600}}/>
+            <img id = "yak" src = "https://mondrian.mashable.com/2016%252F03%252F08%252F89%252Fyikyak.b38d3.jpg%252F950x534.jpg?signature=MOBHM6hQ8ivj8UQPUVcaK4G_HYc="/>
           </center>
           <div className="createCharFields">
             <label htmlFor="username">Username: </label>
