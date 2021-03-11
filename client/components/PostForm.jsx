@@ -38,6 +38,7 @@ class PostForm extends Component {
           <h2>{this.props.alias}</h2>
           <br />
           <textarea
+            value= {this.props.newPostBody}
             placeholder="Add a body"
             onChange={(e) => this.props.updateBody(e.target.value)}
           />
