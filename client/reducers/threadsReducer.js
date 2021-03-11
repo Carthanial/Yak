@@ -25,6 +25,18 @@ const threadsReducer = (state = initialState, action) => {
       const newThreadList = [...state.threads, action.payload];
       return { ...state, threads: newThreadList, newThreadBody: '' };
     }
+    case types.UPDATE_THREAD_KARMA: {
+      const newThreads = state.threads.map((thread) => {
+        if (thread._id === action.payload._id) {
+          return {
+            ...thread,
+            karma: action.payload.karma,
+          };
+        }
+        return thread;
+      });
+      return { ...state, threads: newThreads };
+    }
     default: {
       return state;
     }
