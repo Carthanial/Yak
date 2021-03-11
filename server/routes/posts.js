@@ -22,9 +22,10 @@ router.get(
   }
 );
 /*  Gets all child posts to fill thread container when ---> onClick of button on post component  */
-router.get('/threads',
-  authController.verifyUser, 
-  postsController.getThreadPosts, 
+router.get(
+  '/threads',
+  authController.verifyUser,
+  postsController.getThreadPosts,
   (req, res) => {
     console.log('getting thread posts');
     res.status(200).json(res.locals.threadPosts);
@@ -32,13 +33,13 @@ router.get('/threads',
 );
 /* ******************************************** */
 /*  All routers below will be for posts karma  */
-router.post('/karma',
-  authController.verifyUser, 
-  postsController.updatePostKarma,
-  (req, res) => {
-    console.log('You voted on a post')
-    res.status(200).json(res.locals.newKarma)
-  }
-);
+// router.post('/karma',
+//   authController.verifyUser,
+//   postsController.updatePostKarma,
+//   (req, res) => {
+//     console.log('You voted on a post')
+//     res.status(200).json(res.locals.newKarma)
+//   }
+// );
 
 module.exports = router;

@@ -28,15 +28,14 @@ postsController.getFeedPosts = async (req, res, next) => {
        -->Gets all child comments on a post  */
 postsController.getThreadPosts = async (req, res, next) => {
   try {
-    const { postId } = req.body
+    const { postId } = req.body;
     const query = `
   SELECT * FROM posts p
   WHERE p.parent_id = $1
   ORDER BY p.createdat`;
-    const { rows } = await db.query(query, [postId])
-      res.locals.threadPosts = rows;
-      return next();
-
+    const { rows } = await db.query(query, [postId]);
+    res.locals.threadPosts = rows;
+    return next();
   } catch (err) {
     return next({
       log: 'error at postController.getThreadPosts',
@@ -58,9 +57,9 @@ postsController.createPost = async (req, res, next) => {
         VALUES($1, $2, NOW(), $3, $4)
         RETURNING *`;
 
-      const { rows } = await db.query(query, [user_id, alias, body, parent_id])
-        res.locals.newPost = rows[0];
-        return next();
+      const { rows } = await db.query(query, [user_id, alias, body, parent_id]);
+      res.locals.newPost = rows[0];
+      return next();
 
       /* Error handler for creating a comment ie thread post */
     } catch (err) {
@@ -80,10 +79,10 @@ postsController.createPost = async (req, res, next) => {
           VALUES($1, $2, NOW(), $3)
           RETURNING *`;
 
-      const { rows } = await db.query(query, [user_id, alias, body]) 
-        res.locals.newPost = rows[0];
-        return next();
-      
+      const { rows } = await db.query(query, [user_id, alias, body]);
+      res.locals.newPost = rows[0];
+      return next();
+
       /* Error handling for creating a feed post */
     } catch (err) {
       return next({
@@ -97,17 +96,16 @@ postsController.createPost = async (req, res, next) => {
 /* **************************** */
 /* Controllers for karma logic */
 
-postsController.updatePostKarma = async (req, res, next) => {
-  try{
-    const { post_id, karma } = req.body;
-    
-    const query = `INSERT INTO posts p`;
+// postsController.updatePostKarma = async (req, res, next) => {
+//   try{
+//     const { post_id, karma } = req.body;
 
-    const { rows } = await db.query(query, [])
-        res.locals.newKarma = rows[0];
-        return next();
-  }
-}
+//     const query = `INSERT INTO posts p`;
 
+//     const { rows } = await db.query(query, [])
+//         res.locals.newKarma = rows[0];
+//         return next();
+//   }
+// }
 
 module.exports = postsController;
