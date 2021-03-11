@@ -48,3 +48,21 @@ export const assignAlias = (alias) => ({
   type: types.ASSIGN_ALIAS,
   payload: alias,
 });
+
+export const updatePostKarma = (postID, karma) => (dispatch) => {
+  const reqBody = {
+    post_id: postID,
+    karma: karma,
+  };
+  fetch('/posts/karma', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'Application/JSON' },
+    body: JSON.stringify(reqBody),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('updatePostKarma data: ', data);
+      dispatch({ type: types.UPDATE_POST_KARMA, payload: data });
+    })
+    .catch((e) => console.log(e));
+};

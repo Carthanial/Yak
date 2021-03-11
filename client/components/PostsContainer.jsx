@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPosts, updateActiveThreadID } from '../actions/actions';
+import { getPosts, updateActiveThreadID, updatePostKarma } from '../actions/actions';
 import Post from './Post.jsx';
 import PostForm from './PostForm.jsx';
 import Navbar from './Navbar.jsx';
@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getPosts,
-  updateActiveThreadID
+  updateActiveThreadID,
+  updatePostKarma
 };
 
 class PostsContainer extends Component {
@@ -40,6 +41,7 @@ class PostsContainer extends Component {
         <div>
           <Post
           updateActiveThreadID={this.props.updateActiveThreadID}
+          updatePostKarma={this.props.updatePostKarma}
           key={`Post ${i}`}
           alias={post.alias}
           body={post.body}

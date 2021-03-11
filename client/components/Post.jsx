@@ -33,7 +33,7 @@ const timestamp = (psqlDate) => {
 }
 
 
-export default function Post({ alias, body, dateTime, feedPostID, styling, updateActiveThreadID, karma }) {
+export default function Post({ alias, body, dateTime, feedPostID, styling, karma, updateActiveThreadID, updatePostKarma }) {
   // console.log(styling);
   // to update to display how old (in minutes if less than a day) the posts are
   let time = timestamp(dateTime);

@@ -25,6 +25,21 @@ const postsReducer = (state = initialState, action) => {
     case types.ASSIGN_ALIAS: {
       return { ...state, alias: action.payload };
     }
+    // action.payload contains the returned updated post from backend with new karma value
+    // we create a copy of the posts in state and look for the specific post that was updated
+    // and return a copy of the post object with the updated karma
+    case types.UPDATE_POST_KARMA: {
+      const newPosts = state.posts.map((post) => {
+        if (post._id === action.payload._id) {
+          return {
+            ...post,
+            karma: action.payload.karma,
+          };
+        }
+        return post;
+      });
+      return { ...state, posts: newPosts };
+    }
     default: {
       return state;
     }
