@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {updateBody, savePost } from '../actions/actions';
+import { updateBody, savePost } from '../actions/actions';
+import ls from '../utils/localStorage';
+
+const storage = ls(window.localStorage);
 
 const mapStateToProps = (state) => {
   return {
@@ -15,7 +18,8 @@ const mapDispatchToProps = (dispatch) => {
     updateBody: (value) => dispatch(updateBody(value)),
     handleSubmit: (e, alias, body, id) => {
       e.preventDefault();
-      if (!alias || !body) return;
+      if (!body) return;
+      if (!alias) alias = storage.get('alias');
       dispatch(savePost(alias, body, id));
     },
   };
@@ -35,7 +39,7 @@ class PostForm extends Component {
             )
           }
         >
-          <h2>{this.props.alias}</h2>
+          <h2>{this.props.alias || storage.get('alias')}</h2>
           <br />
           <textarea
             value= {this.props.newPostBody}

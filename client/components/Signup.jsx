@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'AUTHENTICATE', payload: user });
     },
     assignAlias: (alias) => {
-      dispatch({ type: 'ASSIGN_ALIAS', payload: alias})
-    }
+      dispatch({ type: 'ASSIGN_ALIAS', payload: alias });
+    },
   };
 };
 
@@ -63,7 +63,8 @@ const Signup = (props) => {
         .then((data) => {
           props.authenticate(data);
           props.history.push('/');
-          props.assignAlias(data.alias)
+          props.assignAlias(data.alias);
+          storage.set('alias', data.alias);
         })
         .catch((err) => console.log('Sign up fetch /auth/login: ERROR: ', err));
     }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ls from '../utils/localStorage';
 import Navbar from './Navbar.jsx';
 
+console.log('local storage', localStorage);
 const storage = ls(window.localStorage);
 
 // Custom hook for handling input boxes
@@ -60,7 +61,7 @@ const Login = (props) => {
           console.log('data from login is: ', data);
           props.authenticate(data.user);
           props.assignAlias(data.alias);
-
+          storage.set('alias', data.alias);
           // props.history.push('/feed');
           // history.push('/hello');
         })
@@ -84,10 +85,14 @@ const Login = (props) => {
         <article className="card createChar">
           <center>
             <h2 className="SignUpHeader">Yikkity Yak</h2>
+<<<<<<< HEAD
             <img
               id="yak"
               src="https://mondrian.mashable.com/2016%252F03%252F08%252F89%252Fyikyak.b38d3.jpg%252F950x534.jpg?signature=MOBHM6hQ8ivj8UQPUVcaK4G_HYc="
             />
+=======
+            <img src="YikYak.jpg" style={{ height: 300, width: 600 }} />
+>>>>>>> Persisting alias
           </center>
           <div className="createCharFields">
             <label htmlFor="username">Username: </label>
