@@ -1,7 +1,7 @@
 //To hold the the threads (Thread.jsx) & ThreadForm.jsx
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {getThreads} from '../actions/actions';
+import {getThreads, updateThreadKarma} from '../actions/actions';
 import Thread from '../components/Thread.jsx';
 import ThreadForm from '../components/ThreadForm.jsx';
 
@@ -9,6 +9,12 @@ const mapStateToProps = (state) => {
   //
   return { threads: state.threads, userId: state.scratch.user.id};
 };
+
+const mapDispatchToProps = {
+  getThreads,
+  updateThreadKarma,
+};
+
 
 //This Thread component will have two pieces of functionality
 
@@ -36,9 +42,12 @@ class ThreadsContainer extends Component {
             return this.props.threads.threads.map((thread, i) => {
                 return(
                     <Thread
+                    updateThreadKarma={this.props.updateThreadKarma}
                     key={`Thread ${i}`}
                     alias={thread.alias}
+                    _id={thread._id}
                     body={thread.body}
+                    karma={thread.karma}
                     dateTime={thread.createdat}
                     parent_id = {thread.parent_id}
                     styling={thread.user_id === this.props.userId ? 'MyPost' : null}
@@ -60,4 +69,4 @@ class ThreadsContainer extends Component {
      }
     }
 
-    export default connect(mapStateToProps,{getThreads})(ThreadsContainer);
+    export default connect(mapStateToProps,mapDispatchToProps)(ThreadsContainer);

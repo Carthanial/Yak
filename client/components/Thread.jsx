@@ -31,7 +31,7 @@ const timestamp = (psqlDate) => {
     }
   }
 
-export default function Thread({ alias, body, dateTime, styling}) {
+export default function Thread({ alias, body, dateTime, styling, karma, _id, updateThreadKarma}) {
    console.log('Im inside Thread component');
   
    let time = timestamp(dateTime);
@@ -40,6 +40,10 @@ export default function Thread({ alias, body, dateTime, styling}) {
           <h6>{alias}</h6>
           <p>{body}</p>
           <span>{time}</span>
+          <br></br>
+          <button onClick={()=> updateThreadKarma(_id, karma+1)}>Upvote</button>
+          <span>{karma} votes</span>
+          <button onClick={()=> updateThreadKarma(_id, karma-1)}>Downvote</button>
           <br></br>
       </div>
     );

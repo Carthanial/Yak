@@ -95,10 +95,12 @@ body {
   position: fixed;
   bottom: 0;
   left: 50%;
+  right: 10%;
   transform: translateX(-50%);
-  background: #99b898;
+  background:rgba(13, 213, 177, 255);
   z-index: 5;
-  padding-top: 15px;
+  padding-top: 10px;
+  border-radius: 12px;
 
   button {
     background-color: gold;
@@ -163,8 +165,8 @@ body {
   background-color: teal;
 }
 
-.MyPost {
-  color: rgb(98, 98, 189);
+.MyPost { 
+  color:gold;
 }
 
 .time {
