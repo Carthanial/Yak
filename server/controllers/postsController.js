@@ -1,5 +1,4 @@
 const db = require('../models/socialModels');
-const { post } = require('../routes/auth');
 
 const postsController = {};
 
@@ -33,6 +32,7 @@ postsController.getThreadPosts = async (req, res, next) => {
   SELECT * FROM posts p
   WHERE p.parent_id = $1
   ORDER BY p.createdat`;
+
     const { rows } = await db.query(query, [postId]);
     res.locals.threadPosts = rows;
     return next();
@@ -93,19 +93,5 @@ postsController.createPost = async (req, res, next) => {
     }
   }
 };
-/* **************************** */
-/* Controllers for karma logic */
-
-// postsController.updatePostKarma = async (req, res, next) => {
-//   try{
-//     const { post_id, karma } = req.body;
-
-//     const query = `INSERT INTO posts p`;
-
-//     const { rows } = await db.query(query, [])
-//         res.locals.newKarma = rows[0];
-//         return next();
-//   }
-// }
 
 module.exports = postsController;

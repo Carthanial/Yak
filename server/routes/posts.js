@@ -31,15 +31,5 @@ router.get(
     res.status(200).json(res.locals.threadPosts);
   }
 );
-/* ******************************************** */
-/*  All routers below will be for posts karma  */
-// router.post('/karma',
-//   authController.verifyUser,
-//   postsController.updatePostKarma,
-//   (req, res) => {
-//     console.log('You voted on a post')
-//     res.status(200).json(res.locals.newKarma)
-//   }
-// );
 
 module.exports = router;
