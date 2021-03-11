@@ -150,7 +150,7 @@ body {
 .PostsContainer {
   margin-top: 20px;
   color: #2a363b;
-  width: 80vw;
+  width: 70vw;
 }
 
 .ThreadsContainer {
@@ -160,6 +160,7 @@ body {
   border-radius: 10px;
   font-size: 1.5rem;
   width: 50%;
+  background-color: teal;
 }
 
 .MyPost {
@@ -197,8 +198,11 @@ body {
 }
 
 .karmaButton {
-  background-color: black;
+  background-color: whitesmoke;
   padding: 20px;
+  margin: 6px;
+  box-shadow: 6px 3px 3px black;
+  border-radius: 10%;
 }
 
 .signup {
