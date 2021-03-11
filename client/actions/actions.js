@@ -30,6 +30,7 @@ export const savePost = (alias, body, id) => (dispatch) => {
     .then((data) => {
       console.log(data);
       dispatch({ type: types.SAVE_POST, payload: data });
+      dispatch({ type: types.ASSIGN_ALIAS, payload: alias });
     })
     .catch((e) => console.log(e));
 };
@@ -108,6 +109,25 @@ export const updatePostKarma = (postID, karma) => (dispatch) => {
     .then((data) => {
       console.log('updatePostKarma data: ', data);
       dispatch({ type: types.UPDATE_POST_KARMA, payload: data });
+    })
+    .catch((e) => console.log(e));
+};
+
+export const updateThreadKarma = (postID, karma) => (dispatch) => {
+  const reqBody = {
+    post_id: postID,
+    karma: karma,
+  };
+
+  fetch('/posts/karma', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'Application/JSON' },
+    body: JSON.stringify(reqBody),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('updatePostKarma data: ', data);
+      dispatch({ type: types.UPDATE_THREAD_KARMA, payload: data });
     })
     .catch((e) => console.log(e));
 };
