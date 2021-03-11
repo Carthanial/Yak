@@ -33,7 +33,7 @@ const timestamp = (psqlDate) => {
 }
 
 
-export default function Post({ alias, body, dateTime, feedPostID, styling, updateActiveThreadID }) {
+export default function Post({ alias, body, dateTime, feedPostID, styling, updateActiveThreadID, karma }) {
   // console.log(styling);
   // to update to display how old (in minutes if less than a day) the posts are
   let time = timestamp(dateTime);
@@ -42,7 +42,7 @@ export default function Post({ alias, body, dateTime, feedPostID, styling, updat
       <h4>{alias}</h4>
       <p>{body}</p>
       <span>{time}</span>
-      <br></br>
+      <span>{karma}</span>
       <button onClick={()=> updateActiveThreadID(feedPostID)}>Comment</button>
     </div>
   );
