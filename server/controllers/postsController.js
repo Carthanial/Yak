@@ -11,10 +11,9 @@ postsController.getFeedPosts = async (req, res, next) => {
     SELECT * FROM posts p
     WHERE p.parent_id = 0
     ORDER BY p.createdat DESC`;
-    await db.query(query, (err, data) => {
-      res.locals.feedPosts = data.rows;
-      return next();
-    });
+    const { rows } = await db.query(query);
+    res.locals.feedPosts = rows;
+    return next();
   } catch (err) {
     return next({
       log: 'error at postController.getFeedPosts',
@@ -23,17 +22,18 @@ postsController.getFeedPosts = async (req, res, next) => {
     });
   }
 };
-/*  Called in routes/posts.js on router.get('/thread-posts',...)
+/*  Called in routes/posts.js on router.get('/posts/threads,...)
        -->Gets all child comments on a post  */
 postsController.getThreadPosts = async (req, res, next) => {
   try {
-    const { postId } = req.body;
+    const { number } = req.params;
+
     const query = `
   SELECT * FROM posts p
   WHERE p.parent_id = $1
   ORDER BY p.createdat`;
 
-    const { rows } = await db.query(query, [postId]);
+    const { rows } = await db.query(query, [number]);
     res.locals.threadPosts = rows;
     return next();
   } catch (err) {
@@ -91,6 +91,30 @@ postsController.createPost = async (req, res, next) => {
         message: `failed to create post, error: ${err.message}`,
       });
     }
+  }
+};
+/* **************************** */
+/*  Controllers for karma logic */
+
+postsController.updatePostKarma = async (req, res, next) => {
+  try {
+    const { post_id, karma } = req.body;
+
+    const query = `
+    UPDATE posts
+    SET karma = $2
+    WHERE posts._id = $1
+    RETURNING *`;
+
+    const { rows } = await db.query(query, [post_id, karma]);
+    res.locals.newKarma = rows[0];
+    return next();
+  } catch (err) {
+    return next({
+      log: 'error at postsController.updatePostKarma when voting on a post',
+      status: 401,
+      message: `failed to vote on post, error: ${err.message}`,
+    });
   }
 };
 
